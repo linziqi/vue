@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- 模板 -->
+    <script>
+    let arr=[1,2,3,4,5];
+    //求数组每项的倍数，放在另一个数组中
+    /*命名式渲染
+    let newArr=[];
+    for(var i=0;i<arr.length;i++){
+        newArr.push(arr[i]*2)
+    }
+    */
+    //声明式渲染
+    let newArr=arr.map(function(item){
+        return item*2;
+    });
+    console.log(newArr)
+    </script>
+</body>
+</html>
