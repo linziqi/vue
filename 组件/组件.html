@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>自定义下拉框</h2>
+    <custom-select btn-value="查询" v-bind:list="list1"></custom-select>
+    <h2>自定义下拉框2</h2>
+    <custom-select btn-value="搜索" v-bind:list="list2"></custom-select>
+</div>
+<script>
+    //注册组件  全局
+    Vue.component('customSelect',{
+        data(){ //为保存独立性 data必须使用函数，不能使用对象
+            return {    //返回对象
+                selectShow:false,
+                val:''
+            };
+        },
+        props:['btnValue','list'], //必须驼峰   父级自定义属性传值到子级
+        template:`<section class="warp">
+                    <div class="searchIpt clearFix">
+                        <div class="clearFix">
+                            <input type="text" class="keyWord" v-bind:value="val" v-on:click="selectShow=!selectShow" />
+                            <input type="button" v-bind:value="btnValue">
+                            <span></span>
+                        </div>
+                        <custom-list
+                            v-show="selectShow"
+                            v-bind:list="list"
+                            v-on:receive="changeValue"
+                        ></custom-list>
+                    </div>
+                </section>`,
+        methods:{
+            changeValue(data){
+                this.val=data;
+                this.selectShow=false;
+            }
+        }
+    });
+    Vue.component('customList',{
+        props:['list'],
+        template:`<ul class="list">
+                    <li v-for="item in list" v-text="item" v-on:click="selectValue(item)"></li>
+                </ul>`,
+        methods:{
+            selectValue(data){
+                console.log(data)
+                this.$emit('receive',data)  //触发父级自定义事件 receive
+            }
+        }
+    });
+    var data={
+        list1:['广州','深圳','上海','北京'],
+        list2:['10-01','10-02','10-03']
+    }
+    /*
+    //注册组件 局部
+    new Vue({
+        el:'#app',
+        components:{        //局部注册 component为对象，后面加s
+            'custom-select':{
+                template:`<section class="warp">
+                    <div class="searchIpt clearFix">
+                        <div class="clearFix">
+                            <input type="text" class="keyWord" value="" />
+                            <input type="button" value="GO">
+                            <span></span>
+                        </div>
+                        <ul class="list">
+                            <li>html+css</li>
+                            <li>html5+css3</li>
+                            <li>javascript</li>
+                            <li>angular</li>
+                            <li>react</li>
+                            <li>vue</li>
+                            <li>jquery</li>
+                            <li>nodejs</li>
+                        </ul>
+                    </div>
+                </section>`
+            }
+        }
+    })
+    */
+    var data={
+        list1:['广州','深圳','上海','北京'],
+        list2:['10-01','10-02','10-03']
+    }
+    new Vue({
+        el:'#app',
+        data:data,
+    })
+</script>
+</body>
+</html>

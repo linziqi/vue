@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>自定义组件</h2>
+    <custom>
+        <!--父组件作用域-->
+        {{message}}
+    </custom>
+</div>
+<script>
+    Vue.component('custom',{
+        data(){
+          return {
+              message:'我是子组件的数据'
+          }
+        },
+        template:`
+            <div>
+                {{message}}
+                <p>我是第1个提醒</p>
+                <slot></slot>
+            </div>
+        `
+    })
+    new Vue({
+        el:'#app',
+        data:{
+            message:"我是父组件的数据"
+        }
+    })
+</script>
+</body>
+</html>

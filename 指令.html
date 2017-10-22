@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+<div id="demo">
+    <!-- v-bind 简写:
+    <span v-bind:cutomid="id">{{message}}</span>
+    -->
+    <!-- v-on 简写:@
+    <div v-on:click="handle">点击</div>
+    -->
+    <div @click="handle">点击</div>
+    <span :cutomid="id" v-text="message" v-html="html"></span>
+    <span v-show="1">hello!</span>
+    <span v-if="type=='ok'">ok!</span>
+    <span v-else>no!</span>
+    <div v-for="i in items">{{i.text}}</div>
+    <input type="text" v-model="message" />
+
+</div>
+<script>
+    let obj={
+        message:'hello,vue!',
+        id:'123',
+        html:'soqm',
+        type:'ok',
+        items: [
+            {text: '1' },
+            {text: '2' }
+        ],
+        handle:function () {
+            alert('a')
+        }
+    };
+    var vm=new Vue({
+        el:'#demo',
+        data:obj,
+
+    })
+    console.log(vm.items)
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>自定义组件</h2>
+    <custom>
+        <!-- 在值定义组件里面写入内容 可以用slot混合模版 替换slot里面内容-->
+        <div>我是html结构</div>
+        <!-- html标签内容加入slot属性，可替换掉slot标签name那么里面一样的内容 顺序按照slot标签name属性-->
+        <div slot="one">替换第1个提醒</div>
+        <div slot="three">替换第3个提醒</div>
+        <div slot="two">替换第2个提醒</div>
+        <span slot="two">替换第2个提醒</span>
+        <!--template 可批量替换-->
+        <template slot="four">
+            <div>替换第4个提醒</div>
+            <div>替换第4个提醒</div>
+            <div>替换第4个提醒</div>
+            <div>替换第4个提醒</div>
+        </template>
+    </custom>
+</div>
+<script>
+    Vue.component('custom',{
+        template:`
+            <div>
+                <slot>我是将要被替换的默认结构</slot>
+                <slot name="">我没有被替换</slot>
+                <slot name="one"><p>这是第1个提醒</p></slot>
+                <slot name="two"><p>这是第2个提醒</p></slot>
+                <slot name="three"><p>这是第3个提醒</p></slot>
+                <slot name="four"><p>这是第3个提醒</p></slot>
+            </div>
+        `
+    })
+    new Vue({
+        el:'#app',
+    })
+</script>
+</body>
+</html>

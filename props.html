@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>我是父组件{{count}}</h2>
+    <custom-component v-bind:count="count" v-on:increment-click="incrementAdd"></custom-component>
+</div>
+<script>
+    Vue.component('customComponent',{
+        props:['count'],
+        data(){
+          return {
+              incrementCount:this.count,
+          }
+        },
+        template:`
+            <div>
+                <h2>我是一个自定义的组件{{incrementCount}}</h2>
+                <input type="button" value="改变count的值" v-on:click="changeCount"/>
+            </div>
+        `,
+        methods:{
+            changeCount(){
+                this.incrementCount++;
+                this.$emit('increment-click')
+            }
+        }
+    });
+    new Vue({
+        el:'#app',
+        data:{
+            count:0
+        },
+        methods:{
+            incrementAdd(){
+                this.count++;
+            }
+        }
+    })
+</script>
+</body>
+</html>

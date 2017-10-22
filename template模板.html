@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+<!-- template模板 -->
+<!-- 被覆盖 -->
+<div id="demo">
+    <span>hello</span>
+</div>
+<script type="x-template" id="temp">
+    <div>html,{{message}}
+        <span>x-template</span>
+    </div>
+</script>
+<script>
+    var obj={
+        message:'abc'
+    }
+    //根节点只能一个，不能并列
+    // var html='<div>html,{{message}}</div><span>123</span>';
+    //不能直接换行
+    var html='';
+    html+='<div>html,{{message}}' +
+            '<span>sdasd</span>'+
+        '</div>';
+    //Es6 多行字符串
+    var es6=`<div>html,{{message}}
+            <span>es6</span>
+        </div>`;
+    var vm=new Vue({
+        el:'#demo',
+        data:obj,
+        template:'#temp'
+    })
+</script>
+</body>
+</html>

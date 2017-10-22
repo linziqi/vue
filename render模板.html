@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="vue.js"></script>
+    <style>
+        .bg{color:red}
+    </style>
+</head>
+<body>
+<!-- template模板 -->
+
+<div id="demo"></div>
+
+<script>
+    var obj={
+        addClass:true
+    }
+    var vm=new Vue({
+        el:'#demo',
+        render(createElement){
+             var obj=createElement(
+                'ul',
+                {
+                    class:{bg:true},
+                    style:{
+                        fontSize:'30px'
+                    },
+                    attrs:{
+                        abc:'123',
+                        dcf:'dcd'
+                    },
+                    domProps:{
+                        innerHTML:'<li>我是html</li>'
+                    }
+                },
+                [
+                    createElement('li',1),
+                    createElement('li',2),
+                    createElement('li',3),
+                    createElement('li',4),
+                    createElement('li','adc'),
+                ]
+            )
+            return obj
+        }
+
+    })
+</script>
+</body>
+</html>
