@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- 模板 -->
+	<div id="demo">
+		<span v-on:click="clickHandle">{{message}}</span>
+	</div>
+    <script>
+    let obj={
+    	message:'hello!'
+    }
+    var vm=new Vue({
+    	el:'#demo',
+    	data:obj,
+    	methods:{	//定义方法
+    		clickHandle(){
+                console.log(this.$el)
+    			this.message='123';
+    		}
+    	}
+    })
+    console.log(vm.$data)
+    </script>
+</body>
+</html>
